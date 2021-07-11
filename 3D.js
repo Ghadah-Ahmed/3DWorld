@@ -13,6 +13,8 @@
       currentlyAnimating = false,         // Used to check whether characters neck is being used in another anim
       raycaster = new THREE.Raycaster(),  // Used to detect the click on our character
       loaderAnim = document.getElementById('js-loader');
+      var size = window.matchMedia("(max-width: 750px)")
+
     
       init(); 
     
@@ -30,14 +32,26 @@
     renderer.shadowMap.enabled = true;
     renderer.setPixelRatio(window.devicePixelRatio);
     document.getElementById("appebdRender").appendChild(renderer.domElement);
-      
+
       // Add a camera
-    camera = new THREE.PerspectiveCamera(
-      20,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
+      if (size.matches) {
+        console.log("yes")
+        camera = new THREE.PerspectiveCamera(
+          50,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+        );
+ 
+      }else{
+        console.log("No")
+        camera = new THREE.PerspectiveCamera(
+          20,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+        );
+      }
     camera.position.z = 30 
     camera.position.x = 0;
     camera.position.y = -3;
@@ -156,9 +170,16 @@
       }
     );
       
-      document.addEventListener('mousemove', function(e) {
+  
+    if (size.matches) {
+    document.addEventListener('touchmove', function(e) {
       var mousecoords = getMousePos(e);
     });
+  }else{
+    document.addEventListener('mousemove', function(e) {
+      var mousecoords = getMousePos(e);
+    });
+  }
     
     function getMousePos(e) {
       return { x: e.clientX, y: e.clientY };
@@ -213,6 +234,15 @@
       return { x: dx, y: dy };
     }
       
+      if (size.matches) {
+      document.addEventListener('touchmove', function(e) {
+        var mousecoords = getMousePos(e);
+      if (model) {
+          moveJoint(mousecoords, model, 70);
+          // moveJoint(mousecoords, waist, 30);
+      }
+      });
+    }else{
       document.addEventListener('mousemove', function(e) {
         var mousecoords = getMousePos(e);
       if (model) {
@@ -220,4 +250,5 @@
           // moveJoint(mousecoords, waist, 30);
       }
       });
+    }
     })(); // Don't add anything below this line

@@ -567,8 +567,11 @@ video{
       .mobile-parent  {
         display: block;
       }
-      .threeD-Obj{
-        display: none;
+      .sec-5{
+        display: block;
+      }
+      #c{
+        width: 100vw;
       }
       .main-box {
         padding: 0 0 30px 0;
@@ -646,8 +649,5 @@ video{
       }
       .container {
         margin-bottom: 90px;
-       }
-       .loading {
-         display: none;
        }
     }
