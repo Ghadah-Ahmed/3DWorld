@@ -3,17 +3,8 @@
     let scene,  
       renderer,
       camera,
-      model,                              // Our character
-      neck,                               // Reference to the neck bone in the skeleton
-      waist,                               // Reference to the waist bone in the skeleton
-      possibleAnims,                      // Animations found in our file
-      mixer,                              // THREE.js animations mixer
-      idle,                               // Idle, the default state our character returns to
-      clock = new THREE.Clock(),          // Used for anims, which run to a clock instead of frame rate 
-      currentlyAnimating = false,         // Used to check whether characters neck is being used in another anim
-      raycaster = new THREE.Raycaster(),  // Used to detect the click on our character
+      model,                              
       loaderAnim = document.getElementById('js-loader');
-      var size = window.matchMedia("(max-width: 750px)")
 
     
       init(); 
@@ -34,22 +25,12 @@
     document.getElementById("appebdRender").appendChild(renderer.domElement);
 
       // Add a camera
-      if (size.matches) {
-        camera = new THREE.PerspectiveCamera(
-          50,
-          window.innerWidth / window.innerHeight,
-          0.1,
-          1000
-        );
- 
-      }else{
         camera = new THREE.PerspectiveCamera(
           20,
           window.innerWidth / window.innerHeight,
           0.1,
           1000
         );
-      }
     camera.position.z = 30 
     camera.position.x = 0;
     camera.position.y = -3;
@@ -116,10 +97,6 @@
       return needResize;
     }
       const MODEL_PATH = 'uploads_files_2805396_my_project(4).glb';
-      
-      // let stacy_txt = new THREE.TextureLoader().load('eye_free_model_v2_-_3d_by_oscar_creativo/textures/INNER_EYE_1_baseColor.jpeg');
-    
-    // stacy_txt.flipY = false; // we flip the texture so that its the right way up
     
     const stacy_mtl = new THREE.MeshPhongMaterial({
       // map: stacy_txt,
@@ -143,13 +120,6 @@
        o.receiveShadow = true;
       //  o.material = stacy_mtl; // Add this line
      }
-            // Reference the neck and waist bones
-      // if (o.isBone && o.name === 'mixamorigNeck') { 
-      //   neck = o;
-      // }
-      // if (o.isBone && o.name === 'mixamorigSpine') { 
-      //   waist = o;
-      // }
     });
         // Set the models initial scale
     model.scale.set(7, 7, 7);
@@ -168,16 +138,11 @@
       }
     );
       
-  
-    if (size.matches) {
-    document.addEventListener('touchmove', function(e) {
-      var mousecoords = getMousePos(e);
-    });
-  }else{
+
     document.addEventListener('mousemove', function(e) {
       var mousecoords = getMousePos(e);
     });
-  }
+
     
     function getMousePos(e) {
       return { x: e.clientX, y: e.clientY };
@@ -199,7 +164,6 @@
     
       let w = { x: window.innerWidth, y: window.innerHeight };
     
-      // Left (Rotates neck left between 0 and -degreeLimit)
       
        // 1. If cursor is in the left half of screen
       if (x <= w.x / 2) {
@@ -231,16 +195,7 @@
       }
       return { x: dx, y: dy };
     }
-      
-      if (size.matches) {
-      document.addEventListener('touchmove', function(e) {
-        var mousecoords = getMousePos(e);
-      if (model) {
-          moveJoint(mousecoords, model, 70);
-          // moveJoint(mousecoords, waist, 30);
-      }
-      });
-    }else{
+
       document.addEventListener('mousemove', function(e) {
         var mousecoords = getMousePos(e);
       if (model) {
@@ -248,5 +203,5 @@
           // moveJoint(mousecoords, waist, 30);
       }
       });
-    }
-    })(); // Don't add anything below this line
+
+    })(); 
