@@ -570,8 +570,8 @@ video{
       .sec-5{
         display: block;
       }
-      #c{
-        width: 100vw;
+      .threeD-Obj, .loader{
+       display: none;
       }
       .main-box {
         padding: 0 0 30px 0;

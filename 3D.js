@@ -35,7 +35,6 @@
 
       // Add a camera
       if (size.matches) {
-        console.log("yes")
         camera = new THREE.PerspectiveCamera(
           50,
           window.innerWidth / window.innerHeight,
@@ -44,7 +43,6 @@
         );
  
       }else{
-        console.log("No")
         camera = new THREE.PerspectiveCamera(
           20,
           window.innerWidth / window.innerHeight,
