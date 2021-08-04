@@ -2,7 +2,7 @@
 # 3DWorld Project
 
 ##  Description
-
+Website design for the virtual company 3Dees, which produces 3D movies. The design is responsive, and the desktop view features an interactive 3D model, my first web experience with 3D objects.
 
 ##  Desktop View
 
